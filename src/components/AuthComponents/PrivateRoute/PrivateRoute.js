@@ -6,8 +6,8 @@ const PrivateRoute = ({ children }) => {
 
     const [loggedInUser] = useContext(AuthContext)
 
-    if (!loggedInUser?.email) {
-        return <Navigate to="/login" replace />;
+    if (!loggedInUser?.isAdmin) {
+        return <Navigate to="/" replace />;
     }
 
     return children ? children : <Outlet />;

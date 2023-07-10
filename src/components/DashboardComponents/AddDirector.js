@@ -95,7 +95,7 @@ const AddDirector = () => {
                 onChange={(e) => uploadImage(e.target.files[0])}
               />
               {errors.img && (
-                <span className="text-danger">Please upload your image</span>
+                <span className="text-danger">Please upload director image</span>
               )}
               <h6 className="text-secondary mt-3">
                 Your Email <span className="text-danger">*</span>

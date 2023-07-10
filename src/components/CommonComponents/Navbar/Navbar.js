@@ -14,9 +14,9 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           <img src={logo} width="75" alt="logo" />
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -56,14 +56,18 @@ const Navbar = () => {
               </Link>
             </li>
 
-            {loggedInUser.name && (
+            {loggedInUser.isAdmin && (
               <>
-                <li className="me-2 ms-2">{loggedInUser.name}</li>
                 <li>
                   <Link className="nav-link active" to="/dashboard">
                     Dashboard
                   </Link>
                 </li>
+              </>
+            )}
+            {loggedInUser.name && (
+              <>
+                <li className="me-3 ms-2">{loggedInUser.name}</li>
                 <li>
                   <button className="custom-btn" onClick={handleLogOut}>
                     Log Out

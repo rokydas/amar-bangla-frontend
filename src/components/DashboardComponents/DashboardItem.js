@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const DashboardItem = ({ route }) => {
-  const { name, link } = route;
+  const { name, link, icon: Icon } = route;
 
   return (
     <Link to={link} className="text-dark text-decoration-none">
-      <p className="dashboard-item p-2">
-        <i className="fa fa-calendar me-2" aria-hidden="true" /> {name}
-      </p>
+      <div className="dashboard-item p-2 m-2">
+        <Icon className="mb-1" /> {name}
+      </div>
     </Link>
   );
 };
