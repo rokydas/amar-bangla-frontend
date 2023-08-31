@@ -3,9 +3,10 @@ import Director from "./Director";
 
 const Directors = () => {
   const [directors, setDirectors] = useState([]);
+  const apiUrl = process.env.REACT_APP_API_ROOT;
 
   useEffect(() => {
-    fetch("http://localhost:5001/director/all")
+    fetch(`${apiUrl}/director/all`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

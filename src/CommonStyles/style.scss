@@ -58,6 +58,12 @@
   border-radius: 10px;
 }
 
+.dashboard-item-selected {
+  background-color: #2A9D8F;
+  color: white;
+  border-radius: 10px;
+}
+
 .custom-headline {
   color: #2A9D8F;
 }
@@ -68,4 +74,8 @@
 
 .vertical-gap {
   margin: 100px 0px;
+}
+
+.active-dashboard-item {
+  background-color: black;
 }

@@ -5,15 +5,17 @@ const ManageAdmin = () => {
   const [admins, setAdmins] = useState([]);
   const authToken = localStorage.getItem("auth-token");
 
+  const apiUrl = process.env.REACT_APP_API_ROOT;
+
   useEffect(() => {
-    fetch("http://localhost:5001/auth/all", {
+    fetch(`${apiUrl}/auth/all`, {
       headers: {
         Authorization: `Bearer ${authToken}`,
       },
     })
       .then((res) => res.json())
       .then((data) => setAdmins(data.users));
-  }, []);
+  }, [authToken]);
 
   return (
     <div className="container">
@@ -28,7 +30,7 @@ const ManageAdmin = () => {
         </thead>
         <tbody>
           {admins.map((admin) => (
-            <SingleAdmin key={admin.email} admin={admin} />
+            <SingleAdmin key={admin._id} admin={admin} />
           ))}
         </tbody>
       </table>

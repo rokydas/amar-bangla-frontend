@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import loader from '../../Assets/images/loader.gif'
 
 const SingleAdmin = ({ admin }) => {
+
+  const apiUrl = process.env.REACT_APP_API_ROOT;
+
   console.log(admin);
   const [selectedAction, setSelectedAction] = useState(() => {
     if (admin.isAdmin) return "Admin";
@@ -21,7 +24,7 @@ const SingleAdmin = ({ admin }) => {
     }
     setIsLoading(true);
 
-    fetch(`http://localhost:5001/auth/change-role`, {
+    fetch(`${apiUrl}/auth/change-role`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

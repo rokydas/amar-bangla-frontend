@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import DashboardItem from "./DashboardItem";
 import { RiAdminFill } from "react-icons/ri";
@@ -8,13 +8,20 @@ import { BsPersonFillAdd } from "react-icons/bs";
 import { MdOutlineManageAccounts } from "react-icons/md";
 
 const Dashboard = () => {
+  const [selectedItem, setSelectedItem] = useState("");
+
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-2 border-end d-flex flex-column align-items-center">
           <div className="my-5">
             {dashboardRoutes.map((route) => (
-              <DashboardItem key={route.link} route={route} icon={route.icon} />
+              <DashboardItem
+                key={route.link}
+                route={route}
+                selectedItem={selectedItem}
+                setSelectedItem={setSelectedItem}
+              />
             ))}
           </div>
         </div>
@@ -54,4 +61,9 @@ const dashboardRoutes = [
     link: "manage-director",
     icon: MdOutlineManageAccounts,
   },
+  {
+    name: "Membership",
+    link: "membership",
+    
+  }
 ];

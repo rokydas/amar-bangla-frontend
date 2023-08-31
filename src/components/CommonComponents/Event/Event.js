@@ -11,7 +11,7 @@ const Event = ({ event }) => {
   const year = date.getFullYear();
 
   return (
-    <div className="col-md-4 col-sm-6 col-12">
+    <div className="col-md-4 col-sm-6 col-12 ">
       <div className="shadow p-3 mb-5 bg-body-tertiary rounded">
         <img className="img-fluid mb-4" src={event.banner} alt="" />
         <p><AiFillCalendar className="mb-1 me-2" />{`${day}-${month}-${year}`}</p>

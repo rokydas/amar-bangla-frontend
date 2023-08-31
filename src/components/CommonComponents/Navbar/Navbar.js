@@ -55,6 +55,11 @@ const Navbar = () => {
                 Learn Bengali
               </Link>
             </li>
+            <li>
+              <Link className="nav-link active" to="/contact-us">
+                Contact Us
+              </Link>
+            </li>
 
             {loggedInUser.isAdmin && (
               <>

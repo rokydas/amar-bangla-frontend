@@ -10,9 +10,10 @@ const EventDetails = () => {
   const day = date.getDate();
   const month = date.getMonth();
   const year = date.getFullYear();
+  const apiUrl = process.env.REACT_APP_API_ROOT;
 
   useEffect(() => {
-    fetch(`http://localhost:5001/event/${id}`)
+    fetch(`${apiUrl}/event/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

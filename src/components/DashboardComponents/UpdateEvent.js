@@ -1,45 +1,66 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 
-const AddEvent = () => {
+const UpdateEvent = () => {
+  const { id } = useParams();
+
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
+    setValue,
   } = useForm();
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const authToken = localStorage.getItem("auth-token");
   const [banner, setBanner] = useState("");
+  const [prevBanner, setPrevBanner] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [isDisableButton, setIsDisableButton] = useState(false);
   const [date, setDate] = useState(new Date());
+  const apiUrl = process.env.REACT_APP_API_ROOT;
+
+  useEffect(() => {
+    fetch(`${apiUrl}/event/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setPrevBanner(data.socialEvent.banner);
+          setDate(new Date(data.socialEvent.date));
+          setValue("banner", data.socialEvent.banner);
+          setValue("title", data.socialEvent.title);
+          setValue("description", data.socialEvent.description);
+        } else {
+          alert(data.msg);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [id, setValue, apiUrl]);
 
   const onSubmit = (data) => {
     setIsLoading(true);
-    const socialEvent = { ...data, banner, date };
-    const apiUrl = process.env.REACT_APP_API_ROOT;
+    const event = { ...data, banner: banner ? banner : prevBanner, date };
 
-    fetch(`${apiUrl}/event/add`, {
-      method: "POST",
+    fetch(`${apiUrl}/event/update/${id}`, {
+      method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${authToken}`,
       },
-      body: JSON.stringify(socialEvent),
+      body: JSON.stringify(event),
     })
       .then((res) => res.json())
       .then((data) => {
         setIsLoading(false);
         if (data.success) {
           alert(data.msg);
-          reset();
-          setBanner("");
+          navigate("/dashboard/manage-event");
         } else {
           setError(data.msg);
         }
@@ -56,12 +77,12 @@ const AddEvent = () => {
       setIsUploading(true);
       setBanner("");
       setIsDisableButton(true);
-      let imgData = new FormData();
-      imgData.set("key", "eb1530acc816b285faadaf680e0152b7");
-      imgData.append("image", banner);
+      let bannerData = new FormData();
+      bannerData.set("key", "eb1530acc816b285faadaf680e0152b7");
+      bannerData.append("image", banner);
 
       axios
-        .post("https://api.imgbb.com/1/upload", imgData)
+        .post("https://api.imgbb.com/1/upload", bannerData)
         .then((res) => {
           setBanner(res.data.data.display_url);
           setIsUploading(false);
@@ -70,15 +91,20 @@ const AddEvent = () => {
         .catch((error) => console.log(error));
     }
   }
-
   return (
     <div className="container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="row">
           <div className="col-md-6 mx-auto">
             <form onSubmit={handleSubmit(onSubmit)}>
+              <img
+                className="mt-5"
+                width="100px"
+                src={prevBanner}
+                alt="event"
+              />
               <h6 className="text-secondary mt-3">
-                Upload Event Banner <span className="text-danger">*</span>
+                Upload your image <span className="text-danger">*</span>
                 {banner && <span className="text-success">Uploaded</span>}
                 {isUploading && (
                   <div
@@ -92,12 +118,9 @@ const AddEvent = () => {
                 type="file"
                 accept="image/*"
                 disabled={banner}
-                {...register("banner", { required: true })}
+                {...register("banner", { required: false })}
                 onChange={(e) => uploadImage(e.target.files[0])}
               />
-              {errors.banner && (
-                <span className="text-danger">Please upload the banner</span>
-              )}
 
               <h6 className="text-secondary mt-3">
                 Date <span className="text-danger">*</span>
@@ -114,7 +137,7 @@ const AddEvent = () => {
                 className="form-control"
                 {...register("title", { required: true })}
               />
-              {errors.title && (
+              {errors.name && (
                 <span className="text-danger">
                   "Title" is not allowed to be empty
                 </span>
@@ -128,7 +151,7 @@ const AddEvent = () => {
                 className="form-control"
                 {...register("description", { required: true })}
               />
-              {errors.designation && (
+              {errors.description && (
                 <span className="text-danger">
                   "Description" is not allowed to be empty
                 </span>
@@ -144,7 +167,7 @@ const AddEvent = () => {
                 disabled={isDisableButton}
                 className="custom-large-btn mt-3 mx-auto"
               >
-                Add Event
+                Update Event
               </button>
             )}
             <p className="my-3 text-danger">{error}</p>
@@ -155,4 +178,4 @@ const AddEvent = () => {
   );
 };
 
-export default AddEvent;
+export default UpdateEvent;

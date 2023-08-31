@@ -20,6 +20,11 @@ import Events from "./components/Events/Events";
 import Home from "./components/HomeComponents/Home/Home";
 import LearnBengali from "./components/LearnBengali/LearnBengali";
 import EventDetails from "./components/EventDetails/EventDetails";
+import UpdateEvent from "./components/DashboardComponents/UpdateEvent";
+import Membership from "./Membership";
+import ManageHomeContent from "./components/DashboardComponents/ManageHomeContent";
+import Footer from "./components/CommonComponents/Footer/Footer";
+import ContactUs from "./components/ContactUs/ContactUs";
 
 export const AuthContext = createContext();
 
@@ -28,10 +33,12 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const authToken = localStorage.getItem("auth-token");
 
+  const apiUrl = process.env.REACT_APP_API_ROOT;
+
   useEffect(() => {
     setIsLoading(true);
     if (authToken !== "") {
-      fetch("http://localhost:5001/auth/me", {
+      fetch(`${apiUrl}/auth/me`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
@@ -48,7 +55,7 @@ function App() {
       setLoggedInUser({});
       setIsLoading(false);
     }
-  }, []);
+  }, [authToken]);
 
   return (
     <AuthContext.Provider value={[loggedInUser, setLoggedInUser]}>
@@ -66,6 +73,8 @@ function App() {
                 <Route path="/events" element={<Events />} />
                 <Route path="/event/:id" element={<EventDetails />} />
                 <Route path="/learn-bengali" element={<LearnBengali />} />
+                <Route path="/membership" element={<Membership />} />
+                <Route path="/contact-us" element={<ContactUs />} />
 
                 {/* for only admin */}
                 <Route element={<PrivateRoute />}>
@@ -80,6 +89,10 @@ function App() {
                       element={<ManageEvent />}
                     />
                     <Route
+                      path="/dashboard/manage-event/update/:id"
+                      element={<UpdateEvent />}
+                    />
+                    <Route
                       path="/dashboard/add-director"
                       element={<AddDirector />}
                     />
@@ -91,9 +104,14 @@ function App() {
                       path="/dashboard/manage-director/update/:id"
                       element={<UpdateDirector />}
                     />
+                    <Route
+                      path="/dashboard/home-content"
+                      element={<ManageHomeContent />}
+                    />
                   </Route>
                 </Route>
               </Routes>
+              <Footer />
             </>
           ) : (
             <Loader />

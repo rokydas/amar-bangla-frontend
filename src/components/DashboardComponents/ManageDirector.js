@@ -6,8 +6,10 @@ const ManageDirector = () => {
   const authToken = localStorage.getItem("auth-token");
   const [needUpdate, setNeedUpdate] = useState(false);
 
+  const apiUrl = process.env.REACT_APP_API_ROOT;
+
   useEffect(() => {
-    fetch("http://localhost:5001/director/all", {
+    fetch(`${apiUrl}/director/all`, {
       headers: {
         Authorization: `Bearer ${authToken}`,
       },

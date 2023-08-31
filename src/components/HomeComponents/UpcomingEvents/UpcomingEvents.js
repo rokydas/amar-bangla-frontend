@@ -4,10 +4,10 @@ import Event from "../../CommonComponents/Event/Event";
 const UpcomingEvents = () => {
 
   const [eventsData, setEventsData] = useState([])
+  const apiUrl = process.env.REACT_APP_API_ROOT;
 
   useEffect(() => {
-    console.log("events", eventsData)
-    fetch("http://localhost:5001/event/upcoming")
+    fetch(`${apiUrl}/event/upcoming`)
     .then(res => res.json())
     .then(data => {
       if(data.success) {

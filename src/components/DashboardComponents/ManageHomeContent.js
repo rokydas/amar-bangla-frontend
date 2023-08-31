@@ -1,12 +1,8 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { BiSolidEditAlt } from "react-icons/bi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const UpdateDirector = () => {
-  const { id } = useParams();
-
+const ManageHomeContent = () => {
   const {
     register,
     handleSubmit,
@@ -24,33 +20,33 @@ const UpdateDirector = () => {
   const [prevImg, setPrevImg] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [isDisableButton, setIsDisableButton] = useState(false);
-  const apiUrl = process.env.REACT_APP_API_ROOT;
 
-  useEffect(() => {
-    fetch(`${apiUrl}/director/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setPrevImg(data.director.img);
-          setValue("img", data.director.img);
-          setValue("name", data.director.name);
-          setValue("email", data.director.email);
-          setValue("designation", data.director.designation);
-          setValue("facebook", data.director.facebook);
-          setValue("linkedin", data.director.linkedin);
-          setValue("twitter", data.director.twitter);
-        } else {
-          alert(data.msg);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  function uploadImage(img) {
+    // if (img) {
+    //   errors.banner = undefined;
+    //   setIsUploading(true);
+    //   setBanner("");
+    //   setIsDisableButton(true);
+    //   let bannerData = new FormData();
+    //   bannerData.set("key", "eb1530acc816b285faadaf680e0152b7");
+    //   bannerData.append("image", img);
+
+    //   axios
+    //     .post("https://api.imgbb.com/1/upload", bannerData)
+    //     .then((res) => {
+    //       setBanner(res.data.data.display_url);
+    //       setIsUploading(false);
+    //       setIsDisableButton(false);
+    //     })
+    //     .catch((error) => console.log(error));
+    // }
+  }
 
   const onSubmit = (data) => {
     setIsLoading(true);
     const director = { ...data, img: img ? img : prevImg };
 
-    fetch(`${apiUrl}/director/update/${id}`, {
+    fetch(``, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -75,33 +71,18 @@ const UpdateDirector = () => {
       });
   };
 
-  function uploadImage(img) {
-    if (img) {
-      errors.img = undefined;
-      setIsUploading(true);
-      setImg("");
-      setIsDisableButton(true);
-      let imgData = new FormData();
-      imgData.set("key", "eb1530acc816b285faadaf680e0152b7");
-      imgData.append("image", img);
-
-      axios
-        .post("https://api.imgbb.com/1/upload", imgData)
-        .then((res) => {
-          setImg(res.data.data.display_url);
-          setIsUploading(false);
-          setIsDisableButton(false);
-        })
-        .catch((error) => console.log(error));
-    }
-  }
   return (
     <div className="container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="row">
           <div className="col-md-6 mx-auto">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <img className="mt-5" width="100px" src={prevImg} alt="director" />
+              <img
+                className="mt-5"
+                width="100px"
+                src={prevImg}
+                alt="director"
+              />
               <h6 className="text-secondary mt-3">
                 Upload your image <span className="text-danger">*</span>
                 {img && <span className="text-success">Uploaded</span>}
@@ -209,4 +190,4 @@ const UpdateDirector = () => {
   );
 };
 
-export default UpdateDirector;
+export default ManageHomeContent;

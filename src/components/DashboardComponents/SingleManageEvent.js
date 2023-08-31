@@ -3,12 +3,12 @@ import { BiSolidEditAlt } from "react-icons/bi";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-const SingleManageDirector = ({ director, needUpdate, setNeedUpdate }) => {
+const SingleManageEvent = ({ socialEvent, needUpdate, setNeedUpdate }) => {
   const authToken = localStorage.getItem("auth-token");
   const apiUrl = process.env.REACT_APP_API_ROOT;
 
-  const handleDirectorDelete = () => {
-    fetch(`${apiUrl}/director/delete/${director._id}`, {
+  const handleEventDelete = () => {
+    fetch(`${apiUrl}/event/delete/${socialEvent._id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${authToken}`,
@@ -29,21 +29,21 @@ const SingleManageDirector = ({ director, needUpdate, setNeedUpdate }) => {
   return (
     <tr>
       <td>
-        <img width="70px" src={director.img} alt="directorImage" />
+        <img width="70px" src={socialEvent.banner} alt="SocialEventImage" />
       </td>
-      <td>{director.name}</td>
-      <td>{director.email}</td>
-      <td>{director.designation}</td>
+      <td>{socialEvent.title}</td>
+      <td>{socialEvent.date}</td>
+      <td>{socialEvent.description}</td>
       <td>
-        <Link className="text-dark" to={`update/${director._id}`}>
+        <Link className="text-dark" to={`update/${socialEvent._id}`}>
           <BiSolidEditAlt size={25} />
         </Link>
       </td>
-      <td onClick={handleDirectorDelete}>
+      <td onClick={handleEventDelete}>
         <RiDeleteBin6Fill size={25} />
       </td>
     </tr>
   );
 };
 
-export default SingleManageDirector;
+export default SingleManageEvent;

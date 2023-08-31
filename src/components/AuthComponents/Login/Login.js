@@ -11,10 +11,12 @@ const Login = () => {
     const [error, setError] = useState("")
     const navigate = useNavigate();
 
+    const apiUrl = process.env.REACT_APP_API_ROOT;
+
     const onSubmit = data => {
         setIsLoading(true)
 
-        fetch("http://localhost:5001/auth/login", {
+        fetch(`${apiUrl}/auth/login`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

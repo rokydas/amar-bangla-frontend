@@ -13,13 +13,15 @@ const Register = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
+  const apiUrl = process.env.REACT_APP_API_ROOT;
+
   const onSubmit = (data) => {
     setIsLoading(true);
     const profileInfo = { ...data, isAdmin: false };
     if (data.password === data.confirmPassword) {
       delete profileInfo.confirmPassword;
 
-      fetch("http://localhost:5001/auth/register", {
+      fetch(`${apiUrl}/auth/register`, {
         method: "POST",
         headers: {
           Accept: "application/json",

@@ -3,9 +3,10 @@ import Event from "../CommonComponents/Event/Event";
 
 const Events = () => {
   const [eventsData, setEventsData] = useState([]);
+  const apiUrl = process.env.REACT_APP_API_ROOT;
 
   useEffect(() => {
-    fetch("http://localhost:5001/event/all")
+    fetch(`${apiUrl}/event/all`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -19,7 +20,7 @@ const Events = () => {
 
   return (
     <div className="container">
-      <h1 className="text-center mb-5">Events</h1>
+      <h1 className="text-center my-5">Events</h1>
       <div className="row">
         {eventsData.map((event) => (
           <Event event={event} key={event._id} />
