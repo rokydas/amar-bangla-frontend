@@ -3,9 +3,8 @@ import { Outlet } from "react-router-dom";
 import DashboardItem from "./DashboardItem";
 import { RiAdminFill } from "react-icons/ri";
 import { AiFillFileAdd } from "react-icons/ai";
-import { MdEventNote } from "react-icons/md";
+import { MdEventNote, MdOutlineManageAccounts } from "react-icons/md";
 import { BsPersonFillAdd } from "react-icons/bs";
-import { MdOutlineManageAccounts } from "react-icons/md";
 
 const Dashboard = () => {
   const [selectedItem, setSelectedItem] = useState("");
@@ -64,6 +63,6 @@ const dashboardRoutes = [
   {
     name: "Membership",
     link: "membership",
-    
-  }
+    icon: MdOutlineManageAccounts
+  },
 ];
