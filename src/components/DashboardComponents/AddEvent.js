@@ -57,7 +57,7 @@ const AddEvent = () => {
       setBanner("");
       setIsDisableButton(true);
       let imgData = new FormData();
-      imgData.set("key", "eb1530acc816b285faadaf680e0152b7");
+      imgData.set("key", process.env.REACT_APP_IMG_BB_KEY);
       imgData.append("image", banner);
 
       axios

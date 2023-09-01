@@ -15,8 +15,10 @@ const AddDirector = () => {
   const [img, setImg] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [isDisableButton, setIsDisableButton] = useState(false);
+  console.log("hellooo");
 
   const onSubmit = (data) => {
+    console.log("clicked");
     setIsLoading(true);
     const director = { ...data, img };
     const apiUrl = process.env.REACT_APP_API_ROOT;
@@ -54,7 +56,7 @@ const AddDirector = () => {
       setImg("");
       setIsDisableButton(true);
       let imgData = new FormData();
-      imgData.set("key", "eb1530acc816b285faadaf680e0152b7");
+      imgData.set("key", process.env.REACT_APP_IMG_BB_KEY);
       imgData.append("image", img);
 
       axios
@@ -122,6 +124,7 @@ const AddDirector = () => {
                 "Name" is not allowed to be empty
               </span>
             )}
+
             <h6 className="text-secondary mt-3">
               Designation <span className="text-danger">*</span>
             </h6>
@@ -137,20 +140,27 @@ const AddDirector = () => {
               </span>
             )}
 
+            <h6 className="text-secondary mt-3">
+              Profession <span className="text-danger">*</span>
+            </h6>
+            <input
+              type="text"
+              placeholder="Profession"
+              className="form-control"
+              {...register("profession", { required: true })}
+            />
+            {errors.profession && (
+              <span className="text-danger">
+                "Profession" is not allowed to be empty
+              </span>
+            )}
+
             <h6 className="text-secondary mt-3">Facebook</h6>
             <input
               type="text"
               placeholder="Facebook"
               className="form-control"
               {...register("facebook", { required: false })}
-            />
-
-            <h6 className="text-secondary mt-3">Linkedin</h6>
-            <input
-              type="text"
-              placeholder="Linkedin"
-              className="form-control"
-              {...register("linkedin", { required: false })}
             />
 
             <h6 className="text-secondary mt-3">Twitter</h6>
@@ -160,20 +170,21 @@ const AddDirector = () => {
               className="form-control"
               {...register("twitter", { required: false })}
             />
+            {isLoading ? (
+              <div
+                className="spinner-border spinner-border-sm my-3"
+                role="status"
+              ></div>
+            ) : (
+              <button
+                disabled={isDisableButton}
+                className="custom-large-btn mt-3 mx-auto"
+              >
+                Add Director
+              </button>
+            )}
           </form>
-          {isLoading ? (
-            <div
-              className="spinner-border spinner-border-sm my-3"
-              role="status"
-            ></div>
-          ) : (
-            <button
-              disabled={isDisableButton}
-              className="custom-large-btn mt-3 mx-auto"
-            >
-              Add Director
-            </button>
-          )}
+
           <p className="my-3 text-danger">{error}</p>
         </div>
       </div>

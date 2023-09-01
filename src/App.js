@@ -34,6 +34,7 @@ function App() {
   const authToken = localStorage.getItem("auth-token");
 
   const apiUrl = process.env.REACT_APP_API_ROOT;
+  
 
   useEffect(() => {
     setIsLoading(true);
@@ -105,7 +106,11 @@ function App() {
                       element={<UpdateDirector />}
                     />
                     <Route
-                      path="/dashboard/home-content"
+                      path="/dashboard/manage-home"
+                      element={<ManageHomeContent />}
+                    />
+                    <Route
+                      path="/dashboard/manage-about-content"
                       element={<ManageHomeContent />}
                     />
                   </Route>

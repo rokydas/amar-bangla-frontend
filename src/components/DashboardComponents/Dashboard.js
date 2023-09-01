@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import DashboardItem from "./DashboardItem";
 import { RiAdminFill } from "react-icons/ri";
-import { AiFillFileAdd } from "react-icons/ai";
+import { AiFillFileAdd, AiFillHome } from "react-icons/ai";
 import { MdEventNote, MdOutlineManageAccounts } from "react-icons/md";
 import { BsPersonFillAdd } from "react-icons/bs";
+import { FcAbout } from "react-icons/fc";
 
 const Dashboard = () => {
   const [selectedItem, setSelectedItem] = useState("");
@@ -61,8 +62,13 @@ const dashboardRoutes = [
     icon: MdOutlineManageAccounts,
   },
   {
-    name: "Membership",
-    link: "membership",
-    icon: MdOutlineManageAccounts
+    name: "Manage Home Content",
+    link: "manage-home",
+    icon: AiFillHome
   },
+  {
+    name: "Manage About Content",
+    link: "manage-about",
+    icon: FcAbout
+  }
 ];

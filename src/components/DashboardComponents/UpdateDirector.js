@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { BiSolidEditAlt } from "react-icons/bi";
 import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateDirector = () => {
@@ -36,6 +35,7 @@ const UpdateDirector = () => {
           setValue("name", data.director.name);
           setValue("email", data.director.email);
           setValue("designation", data.director.designation);
+          setValue("profession", data.director.profession);
           setValue("facebook", data.director.facebook);
           setValue("linkedin", data.director.linkedin);
           setValue("twitter", data.director.twitter);
@@ -64,7 +64,7 @@ const UpdateDirector = () => {
         setIsLoading(false);
         if (data.success) {
           alert(data.msg);
-          navigate("/dashboard/manage-director")
+          navigate("/dashboard/manage-director");
         } else {
           setError(data.msg);
         }
@@ -82,7 +82,7 @@ const UpdateDirector = () => {
       setImg("");
       setIsDisableButton(true);
       let imgData = new FormData();
-      imgData.set("key", "eb1530acc816b285faadaf680e0152b7");
+      imgData.set("key", process.env.REACT_APP_IMG_BB_KEY);
       imgData.append("image", img);
 
       axios
@@ -101,7 +101,12 @@ const UpdateDirector = () => {
         <div className="row">
           <div className="col-md-6 mx-auto">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <img className="mt-5" width="100px" src={prevImg} alt="director" />
+              <img
+                className="mt-5"
+                width="100px"
+                src={img ? img : prevImg}
+                alt="director"
+              />
               <h6 className="text-secondary mt-3">
                 Upload your image <span className="text-danger">*</span>
                 {img && <span className="text-success">Uploaded</span>}
@@ -161,6 +166,21 @@ const UpdateDirector = () => {
               {errors.designation && (
                 <span className="text-danger">
                   "Designation" is not allowed to be empty
+                </span>
+              )}
+
+              <h6 className="text-secondary mt-3">
+                Profession <span className="text-danger">*</span>
+              </h6>
+              <input
+                type="text"
+                placeholder="Profession"
+                className="form-control"
+                {...register("profession", { required: true })}
+              />
+              {errors.profession && (
+                <span className="text-danger">
+                  "Profession" is not allowed to be empty
                 </span>
               )}
 

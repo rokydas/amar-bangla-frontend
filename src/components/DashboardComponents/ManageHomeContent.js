@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import ImageBlock from "../CommonComponents/ImageBlock/ImageBlock";
 
 const ManageHomeContent = () => {
   const {
@@ -21,30 +22,9 @@ const ManageHomeContent = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [isDisableButton, setIsDisableButton] = useState(false);
 
-  function uploadImage(img) {
-    // if (img) {
-    //   errors.banner = undefined;
-    //   setIsUploading(true);
-    //   setBanner("");
-    //   setIsDisableButton(true);
-    //   let bannerData = new FormData();
-    //   bannerData.set("key", "eb1530acc816b285faadaf680e0152b7");
-    //   bannerData.append("image", img);
-
-    //   axios
-    //     .post("https://api.imgbb.com/1/upload", bannerData)
-    //     .then((res) => {
-    //       setBanner(res.data.data.display_url);
-    //       setIsUploading(false);
-    //       setIsDisableButton(false);
-    //     })
-    //     .catch((error) => console.log(error));
-    // }
-  }
-
   const onSubmit = (data) => {
     setIsLoading(true);
-    const director = { ...data, img: img ? img : prevImg };
+    const homeContent = { ...data, img: img ? img : prevImg };
 
     fetch(``, {
       method: "PUT",
@@ -53,14 +33,13 @@ const ManageHomeContent = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${authToken}`,
       },
-      body: JSON.stringify(director),
+      body: JSON.stringify(homeContent),
     })
       .then((res) => res.json())
       .then((data) => {
         setIsLoading(false);
         if (data.success) {
           alert(data.msg);
-          navigate("/dashboard/manage-director")
         } else {
           setError(data.msg);
         }
@@ -77,97 +56,120 @@ const ManageHomeContent = () => {
         <div className="row">
           <div className="col-md-6 mx-auto">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <img
-                className="mt-5"
-                width="100px"
-                src={prevImg}
-                alt="director"
+              <ImageBlock
+                isDisableButton={isDisableButton}
+                setIsDisableButton={setIsDisableButton}
+                name="banner"
+                title="Banner"
               />
-              <h6 className="text-secondary mt-3">
-                Upload your image <span className="text-danger">*</span>
-                {img && <span className="text-success">Uploaded</span>}
-                {isUploading && (
-                  <div
-                    className="spinner-border spinner-border-sm"
-                    role="status"
-                  ></div>
-                )}
-              </h6>
-              <input
-                className="form-control mt-2"
-                type="file"
-                accept="image/*"
-                disabled={img}
-                {...register("img", { required: false })}
-                onChange={(e) => uploadImage(e.target.files[0])}
+              <ImageBlock
+                isDisableButton={isDisableButton}
+                setIsDisableButton={setIsDisableButton}
+                name="leftImg"
+                title="Left Image"
+              />
+              <ImageBlock
+                isDisableButton={isDisableButton}
+                setIsDisableButton={setIsDisableButton}
+                name="rightImg"
+                title="Right Image"
               />
 
+              {/* Top Headline */}
               <h6 className="text-secondary mt-3">
-                Your Email <span className="text-danger">*</span>
-              </h6>
-              <input
-                type="email"
-                placeholder="Email"
-                className="form-control"
-                {...register("email", { required: true })}
-              />
-              {errors.email && (
-                <span className="text-danger">
-                  "Email" is not allowed to be empty
-                </span>
-              )}
-              <h6 className="text-secondary mt-3">
-                Name <span className="text-danger">*</span>
+                Top Headline <span className="text-danger">*</span>
               </h6>
               <input
                 type="text"
-                placeholder="Name"
+                placeholder="Top Headline"
                 className="form-control"
-                {...register("name", { required: true })}
+                {...register("topHeadline", { required: true })}
               />
-              {errors.name && (
+              {errors.topHeadline && (
                 <span className="text-danger">
-                  "Name" is not allowed to be empty
-                </span>
-              )}
-              <h6 className="text-secondary mt-3">
-                Designation <span className="text-danger">*</span>
-              </h6>
-              <input
-                type="text"
-                placeholder="Designation"
-                className="form-control"
-                {...register("designation", { required: true })}
-              />
-              {errors.designation && (
-                <span className="text-danger">
-                  "Designation" is not allowed to be empty
+                  "Top Headline" is not allowed to be empty
                 </span>
               )}
 
-              <h6 className="text-secondary mt-3">Facebook</h6>
+              {/* Top Description */}
+              <h6 className="text-secondary mt-3">
+                Top Description <span className="text-danger">*</span>
+              </h6>
               <input
                 type="text"
-                placeholder="Facebook"
+                placeholder="Top Description"
                 className="form-control"
-                {...register("facebook", { required: false })}
+                {...register("topDescription", { required: true })}
               />
+              {errors.topDescription && (
+                <span className="text-danger">
+                  "Top Description" is not allowed to be empty
+                </span>
+              )}
 
-              <h6 className="text-secondary mt-3">Linkedin</h6>
+              {/* Right Headline */}
+              <h6 className="text-secondary mt-3">
+                Right Headline <span className="text-danger">*</span>
+              </h6>
               <input
                 type="text"
-                placeholder="Linkedin"
+                placeholder="Right Headline"
                 className="form-control"
-                {...register("linkedin", { required: false })}
+                {...register("rightHeadline", { required: true })}
               />
+              {errors.rightHeadline && (
+                <span className="text-danger">
+                  "Right Headline" is not allowed to be empty
+                </span>
+              )}
 
-              <h6 className="text-secondary mt-3">Twitter</h6>
+              {/* Right Description */}
+              <h6 className="text-secondary mt-3">
+                Right Description <span className="text-danger">*</span>
+              </h6>
               <input
                 type="text"
-                placeholder="Twitter"
+                placeholder="Right Description"
                 className="form-control"
-                {...register("twitter", { required: false })}
+                {...register("rightDescription", { required: true })}
               />
+              {errors.rightDescription && (
+                <span className="text-danger">
+                  "Right Description" is not allowed to be empty
+                </span>
+              )}
+
+              {/* Left Headline */}
+              <h6 className="text-secondary mt-3">
+                Left Headline <span className="text-danger">*</span>
+              </h6>
+              <input
+                type="text"
+                placeholder="Left Headline"
+                className="form-control"
+                {...register("leftHeadline", { required: true })}
+              />
+              {errors.leftHeadline && (
+                <span className="text-danger">
+                  "Left Headline" is not allowed to be empty
+                </span>
+              )}
+
+              {/* Left Description */}
+              <h6 className="text-secondary mt-3">
+                Left Description <span className="text-danger">*</span>
+              </h6>
+              <input
+                type="text"
+                placeholder="Left Description"
+                className="form-control"
+                {...register("leftDescription", { required: true })}
+              />
+              {errors.leftHeadline && (
+                <span className="text-danger">
+                  "Left Description" is not allowed to be empty
+                </span>
+              )}
             </form>
             {isLoading ? (
               <div
@@ -179,7 +181,7 @@ const ManageHomeContent = () => {
                 disabled={isDisableButton}
                 className="custom-large-btn mt-3 mx-auto"
               >
-                Update Director
+                Update Home Content
               </button>
             )}
             <p className="my-3 text-danger">{error}</p>
