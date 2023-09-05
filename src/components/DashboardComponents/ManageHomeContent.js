@@ -134,8 +134,9 @@ const ManageHomeContent = () => {
               <h6 className="text-secondary mt-3">
                 Top Description <span className="text-danger">*</span>
               </h6>
-              <input
+              <textarea
                 type="text"
+                rows="7"
                 placeholder="Top Description"
                 className="form-control"
                 {...register("topDescription", { required: true })}
@@ -166,8 +167,9 @@ const ManageHomeContent = () => {
               <h6 className="text-secondary mt-3">
                 Right Description <span className="text-danger">*</span>
               </h6>
-              <input
+              <textarea
                 type="text"
+                rows="7"
                 placeholder="Right Description"
                 className="form-control"
                 {...register("rightDescription", { required: true })}
@@ -198,13 +200,14 @@ const ManageHomeContent = () => {
               <h6 className="text-secondary mt-3">
                 Left Description <span className="text-danger">*</span>
               </h6>
-              <input
+              <textarea
                 type="text"
+                rows="7"
                 placeholder="Left Description"
                 className="form-control"
                 {...register("leftDescription", { required: true })}
               />
-              {errors.leftHeadline && (
+              {errors.leftDescription && (
                 <span className="text-danger">
                   "Left Description" is not allowed to be empty
                 </span>

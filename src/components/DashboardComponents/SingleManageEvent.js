@@ -7,6 +7,11 @@ const SingleManageEvent = ({ socialEvent, needUpdate, setNeedUpdate }) => {
   const authToken = localStorage.getItem("auth-token");
   const apiUrl = process.env.REACT_APP_API_ROOT;
 
+  const date = new Date(socialEvent.date);
+  const day = date.getDate();
+  const month = date.getMonth()+1;
+  const year = date.getFullYear();
+
   const handleEventDelete = () => {
     fetch(`${apiUrl}/event/delete/${socialEvent._id}`, {
       method: "DELETE",
@@ -32,7 +37,7 @@ const SingleManageEvent = ({ socialEvent, needUpdate, setNeedUpdate }) => {
         <img width="70px" src={socialEvent.banner} alt="SocialEventImage" />
       </td>
       <td>{socialEvent.title}</td>
-      <td>{socialEvent.date}</td>
+      <td>{`${day}-${month}-${year}`}</td>
       <td>{socialEvent.description}</td>
       <td>
         <Link className="text-dark" to={`update/${socialEvent._id}`}>

@@ -7,7 +7,7 @@ const Event = ({ event }) => {
   const navigate = useNavigate();
   const date = new Date(event.date);
   const day = date.getDate();
-  const month = date.getMonth();
+  const month = date.getMonth()+1;
   const year = date.getFullYear();
 
   return (

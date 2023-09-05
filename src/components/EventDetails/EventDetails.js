@@ -8,7 +8,7 @@ const EventDetails = () => {
 
   const date = new Date(event.date);
   const day = date.getDate();
-  const month = date.getMonth();
+  const month = date.getMonth()+1;
   const year = date.getFullYear();
   const apiUrl = process.env.REACT_APP_API_ROOT;
 

@@ -104,13 +104,14 @@ const ManageAboutContent = () => {
               <h6 className="text-secondary mt-3">
                 Description <span className="text-danger">*</span>
               </h6>
-              <input
+              <textarea
                 type="text"
+                rows="7"
                 placeholder="Description"
                 className="form-control"
                 {...register("description", { required: true })}
               />
-              {errors.topDescription && (
+              {errors.description && (
                 <span className="text-danger">
                   "Description" is not allowed to be empty
                 </span>

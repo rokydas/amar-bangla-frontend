@@ -122,9 +122,10 @@ const AddEvent = () => {
               <h6 className="text-secondary mt-3">
                 Description <span className="text-danger">*</span>
               </h6>
-              <input
+              <textarea
                 type="text"
                 placeholder="Description"
+                rows="7"
                 className="form-control"
                 {...register("description", { required: true })}
               />
