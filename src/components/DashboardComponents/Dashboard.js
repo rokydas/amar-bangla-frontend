@@ -3,9 +3,10 @@ import { Outlet } from "react-router-dom";
 import DashboardItem from "./DashboardItem";
 import { RiAdminFill } from "react-icons/ri";
 import { AiFillFileAdd, AiFillHome } from "react-icons/ai";
-import { MdEventNote, MdOutlineManageAccounts } from "react-icons/md";
+import { MdCardMembership, MdEventNote, MdOutlineManageAccounts } from "react-icons/md";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { FcAbout } from "react-icons/fc";
+import { SiSololearn } from "react-icons/si";
 
 const Dashboard = () => {
   const [selectedItem, setSelectedItem] = useState("");
@@ -70,5 +71,15 @@ const dashboardRoutes = [
     name: "Manage About Content",
     link: "manage-about",
     icon: FcAbout
+  },
+  {
+    name: "Manage Membership Content",
+    link: "manage-membership",
+    icon: MdCardMembership
+  },
+  {
+    name: "Manage Learn Bengali",
+    link: "manage-learn",
+    icon: SiSololearn
   }
 ];

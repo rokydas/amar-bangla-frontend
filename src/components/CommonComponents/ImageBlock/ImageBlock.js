@@ -1,8 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const ImageBlock = ({ isDisableButton, setIsDisableButton, name, title }) => {
-  const [img, setImg] = useState("");
+const ImageBlock = ({
+  isDisableButton,
+  setIsDisableButton,
+  name,
+  title,
+  img,
+  setImg,
+  prevImg,
+}) => {
   const [isUploading, setIsUploading] = useState(false);
 
   function uploadImage(img) {
@@ -27,6 +34,12 @@ const ImageBlock = ({ isDisableButton, setIsDisableButton, name, title }) => {
 
   return (
     <div>
+      <img
+        className="mt-5"
+        width="100px"
+        src={img ? img : prevImg}
+        alt="image"
+      />
       <h6 className="text-secondary mt-3">
         Upload {title} <span className="text-danger">*</span>
         {img && <span className="text-success">Uploaded</span>}

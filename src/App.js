@@ -25,6 +25,9 @@ import Membership from "./Membership";
 import ManageHomeContent from "./components/DashboardComponents/ManageHomeContent";
 import Footer from "./components/CommonComponents/Footer/Footer";
 import ContactUs from "./components/ContactUs/ContactUs";
+import ManageAboutContent from "./components/DashboardComponents/ManageAboutContent";
+import ManageMembershipContent from "./components/DashboardComponents/ManageMembership";
+import ManageLearnBengaliContent from "./components/DashboardComponents/ManageLearnBengali";
 
 export const AuthContext = createContext();
 
@@ -110,8 +113,16 @@ function App() {
                       element={<ManageHomeContent />}
                     />
                     <Route
-                      path="/dashboard/manage-about-content"
-                      element={<ManageHomeContent />}
+                      path="/dashboard/manage-about"
+                      element={<ManageAboutContent />}
+                    />
+                    <Route
+                      path="/dashboard/manage-membership"
+                      element={<ManageMembershipContent />}
+                    />
+                    <Route
+                      path="/dashboard/manage-learn"
+                      element={<ManageLearnBengaliContent />}
                     />
                   </Route>
                 </Route>

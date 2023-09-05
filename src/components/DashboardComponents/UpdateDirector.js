@@ -37,7 +37,6 @@ const UpdateDirector = () => {
           setValue("designation", data.director.designation);
           setValue("profession", data.director.profession);
           setValue("facebook", data.director.facebook);
-          setValue("linkedin", data.director.linkedin);
           setValue("twitter", data.director.twitter);
         } else {
           alert(data.msg);
@@ -190,14 +189,6 @@ const UpdateDirector = () => {
                 placeholder="Facebook"
                 className="form-control"
                 {...register("facebook", { required: false })}
-              />
-
-              <h6 className="text-secondary mt-3">Linkedin</h6>
-              <input
-                type="text"
-                placeholder="Linkedin"
-                className="form-control"
-                {...register("linkedin", { required: false })}
               />
 
               <h6 className="text-secondary mt-3">Twitter</h6>

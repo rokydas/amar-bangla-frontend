@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import ImageBlock from "../CommonComponents/ImageBlock/ImageBlock";
@@ -17,16 +17,46 @@ const ManageHomeContent = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const authToken = localStorage.getItem("auth-token");
-  const [img, setImg] = useState("");
-  const [prevImg, setPrevImg] = useState("");
-  const [isUploading, setIsUploading] = useState(false);
+  const [banner, setBanner] = useState("");
+  const [prevBanner, setPrevBanner] = useState("");
+  const [leftImg, setLeftImg] = useState("");
+  const [prevLeftImg, setPrevLeftImg] = useState("");
+  const [rightImg, setRightImg] = useState("");
+  const [prevRightImg, setPrevRightImg] = useState("");
   const [isDisableButton, setIsDisableButton] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_ROOT;
+
+  useEffect(() => {
+    fetch(`${apiUrl}/home/all`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setPrevBanner(data.home.banner);
+          setPrevLeftImg(data.home.leftImg);
+          setPrevRightImg(data.home.rightImg);
+          setValue("topHeadline", data.home.topHeadline);
+          setValue("topDescription", data.home.topDescription);
+          setValue("leftHeadline", data.home.leftHeadline);
+          setValue("leftDescription", data.home.leftDescription);
+          setValue("rightHeadline", data.home.rightHeadline);
+          setValue("rightDescription", data.home.rightDescription);
+        } else {
+          alert(data.msg);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const onSubmit = (data) => {
     setIsLoading(true);
-    const homeContent = { ...data, img: img ? img : prevImg };
+    const homeContent = {
+      ...data,
+      banner: banner ? banner : prevBanner,
+      leftImg: leftImg ? leftImg : prevLeftImg,
+      rightImg: rightImg ? rightImg : prevRightImg,
+    };
 
-    fetch(``, {
+    fetch(`${apiUrl}/home/update`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -61,18 +91,27 @@ const ManageHomeContent = () => {
                 setIsDisableButton={setIsDisableButton}
                 name="banner"
                 title="Banner"
+                img={banner}
+                setImg={setBanner}
+                prevImg={prevBanner}
               />
               <ImageBlock
                 isDisableButton={isDisableButton}
                 setIsDisableButton={setIsDisableButton}
                 name="leftImg"
                 title="Left Image"
+                img={leftImg}
+                setImg={setLeftImg}
+                prevImg={prevLeftImg}
               />
               <ImageBlock
                 isDisableButton={isDisableButton}
                 setIsDisableButton={setIsDisableButton}
                 name="rightImg"
                 title="Right Image"
+                img={rightImg}
+                setImg={setRightImg}
+                prevImg={prevRightImg}
               />
 
               {/* Top Headline */}
