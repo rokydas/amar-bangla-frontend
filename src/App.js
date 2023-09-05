@@ -28,6 +28,8 @@ import ContactUs from "./components/ContactUs/ContactUs";
 import ManageAboutContent from "./components/DashboardComponents/ManageAboutContent";
 import ManageMembershipContent from "./components/DashboardComponents/ManageMembership";
 import ManageLearnBengaliContent from "./components/DashboardComponents/ManageLearnBengali";
+import ByLaw from "./components/ByLaw/ByLaw";
+import ManageByLaw from "./components/DashboardComponents/ManageByLaw";
 
 export const AuthContext = createContext();
 
@@ -79,6 +81,7 @@ function App() {
                 <Route path="/learn-bengali" element={<LearnBengali />} />
                 <Route path="/membership" element={<Membership />} />
                 <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/by-law" element={<ByLaw />} />
 
                 {/* for only admin */}
                 <Route element={<PrivateRoute />}>
@@ -123,6 +126,10 @@ function App() {
                     <Route
                       path="/dashboard/manage-learn"
                       element={<ManageLearnBengaliContent />}
+                    />
+                    <Route
+                      path="/dashboard/manage-by-law"
+                      element={<ManageByLaw />}
                     />
                   </Route>
                 </Route>

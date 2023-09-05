@@ -50,7 +50,14 @@ const Footer = () => {
               <li>FAQ</li>
               <li>Blog</li>
               <li>Privacy Policy</li>
-              <li>Terms & Condition</li>
+              <li>
+                <Link
+                  className="text-white text-decoration-none"
+                  to="/by-law"
+                >
+                  By Law
+                </Link>
+              </li>
             </div>
           </div>
         </div>

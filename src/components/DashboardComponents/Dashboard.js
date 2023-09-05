@@ -4,7 +4,7 @@ import DashboardItem from "./DashboardItem";
 import { RiAdminFill } from "react-icons/ri";
 import { AiFillFileAdd, AiFillHome } from "react-icons/ai";
 import { MdCardMembership, MdEventNote, MdOutlineManageAccounts } from "react-icons/md";
-import { BsPersonFillAdd } from "react-icons/bs";
+import { BsFillAwardFill, BsPersonFillAdd } from "react-icons/bs";
 import { FcAbout } from "react-icons/fc";
 import { SiSololearn } from "react-icons/si";
 
@@ -81,5 +81,10 @@ const dashboardRoutes = [
     name: "Manage Learn Bengali",
     link: "manage-learn",
     icon: SiSololearn
+  },
+  {
+    name: "Manage By Law",
+    link: "manage-by-law",
+    icon: BsFillAwardFill
   }
 ];
