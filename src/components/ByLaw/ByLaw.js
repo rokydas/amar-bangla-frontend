@@ -34,7 +34,7 @@ const ByLaw = () => {
         {byLaw.description}
       </p>
       <button className="custom-btn" onClick={onButtonClick}>
-        Download ByLaw Form
+        Download By-Law
       </button>
     </div>
   );
