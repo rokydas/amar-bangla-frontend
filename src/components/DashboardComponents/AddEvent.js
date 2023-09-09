@@ -140,20 +140,16 @@ const AddEvent = () => {
               </span>
             )}
             <h6 className="text-secondary mt-3">
-              Description <span className="text-danger">*</span>
+              Description
             </h6>
             <textarea
               type="text"
               placeholder="Description"
               rows="7"
               className="form-control"
-              {...register("description", { required: true })}
+              {...register("description", { required: false })}
             />
-            {errors.designation && (
-              <span className="text-danger">
-                "Description" is not allowed to be empty
-              </span>
-            )}
+
             <h6 className="text-secondary mt-3">
               Gallery <span className="text-danger">*</span>
             </h6>
