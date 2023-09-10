@@ -1,5 +1,4 @@
 import React from "react";
-import nature from "../../../Assets/images/nature.jpg";
 
 const Intro = ( {homeContent} ) => {
   return (
@@ -8,8 +7,8 @@ const Intro = ( {homeContent} ) => {
         <h1 className="custom-headline">
           {homeContent.topHeadline}
         </h1>
-        <p>
-          {homeContent.topDescription}
+        <p style={{textAlign: "justify"}}>
+          <pre>{homeContent.topDescription}</pre>
         </p>
       </div>
     </div>
