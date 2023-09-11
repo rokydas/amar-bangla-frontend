@@ -20,11 +20,12 @@ const Home = () => {
   }, [])
 
   return (
-    <div>
+    <div style={{ whiteSpace: "pre-line" }}>
       <Header homeContent={homeContent} />
       <Intro homeContent={homeContent} />
       <ShowCase homeContent={homeContent} />
-      <UpcomingEvents homeContent={homeContent} />
+      <UpcomingEvents />
+      {/* <Hello /> */}
     </div>
   );
 };

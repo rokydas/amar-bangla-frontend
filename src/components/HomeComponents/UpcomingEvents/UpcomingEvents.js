@@ -30,7 +30,7 @@ const UpcomingEvents = () => {
       </div>
     );
   } else {
-    <></>;
+    return <></>;
   }
 };
 

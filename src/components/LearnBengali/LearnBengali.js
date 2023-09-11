@@ -11,27 +11,27 @@ const LearnBengali = () => {
   }, []);
 
   return (
-    <div className="my-5">
+    <div className="my-5" style={{ whiteSpace: "pre-line" }}>
       <div className="container">
         <h1 className="custom-headline text-center">{learn.title}</h1>
-        <p className="custom-para text-center">{learn.description}</p>
+        <p className="custom-para" style={{ textAlign: "justify" }}>{learn.description}</p>
         <div className="row mt-5">
           <div className="col-md-4">
             <div className="shadow p-3 mb-5 bg-body-tertiary rounded">
               <img className="img-fluid mb-3" src={learn.firstImg} alt="" />
-              <p>{learn.firstDescription}</p>
+              <p style={{ textAlign: "justify" }}>{learn.firstDescription}</p>
             </div>
           </div>
           <div className="col-md-4">
             <div className="shadow p-3 mb-5 bg-body-tertiary rounded">
               <img className="img-fluid mb-3" src={learn.secondImg} alt="" />
-              <p>{learn.secondDescription}</p>
+              <p style={{ textAlign: "justify" }}>{learn.secondDescription}</p>
             </div>
           </div>
           <div className="col-md-4">
             <div className="shadow p-3 mb-5 bg-body-tertiary rounded">
               <img className="img-fluid mb-3" src={learn.thirdImg} alt="" />
-              <p>{learn.thirdDescription}</p>
+              <p style={{ textAlign: "justify" }}>{learn.thirdDescription}</p>
             </div>
           </div>
         </div>

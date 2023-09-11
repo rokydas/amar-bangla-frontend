@@ -18,7 +18,7 @@ const About = () => {
   }, [])
 
   return (
-    <div className="container">
+    <div className="container" style={{ whiteSpace: "pre-line" }}>
       <div className="row my-5 d-flex align-items-center">
         <div className="col-md-6">
           <div className="d-flex justify-content-center">
@@ -27,7 +27,7 @@ const About = () => {
         </div>
         <div className="col-md-6">
           <h1 className="custom-headline">{aboutContent.headline}</h1>
-          <p>
+          <p style={{ textAlign: "justify" }}>
             {aboutContent.description}
           </p>
         </div>

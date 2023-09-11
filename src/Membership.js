@@ -27,9 +27,9 @@ const Membership = () => {
   };
 
   return (
-    <div className="text-center my-5 container">
+    <div className="text-center my-5 container" style={{ whiteSpace: "pre-line" }}>
       <h1>{membership.title}</h1>
-      <p>
+      <p style={{ textAlign: "justify" }}>
         {membership.description}
       </p>
       <button className="custom-btn" onClick={onButtonClick}>

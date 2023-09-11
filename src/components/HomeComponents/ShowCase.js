@@ -9,7 +9,7 @@ const ShowCase = ({homeContent}) => {
         </div>
         <div className="col-md-6">
           <h2 className="custom-headline">{homeContent.rightHeadline}</h2>
-          <p className="custom-para">
+          <p className="custom-para" style={{ textAlign: "justify" }}>
             {homeContent.rightDescription}
           </p>
         </div>
@@ -17,7 +17,7 @@ const ShowCase = ({homeContent}) => {
       <div className="row vertical-gap">
         <div className="col-md-6">
           <h2 className="custom-headline">{homeContent.leftHeadline}</h2>
-          <p className="custom-para">
+          <p className="custom-para" style={{ textAlign: "justify" }}>
             {homeContent.leftDescription}
           </p>
         </div>
